@@ -229,7 +229,7 @@ public class ConfigParser {
         File[] files = templateDir.listFiles();
         if (Objects.nonNull(files)) {
             for (File file : files) {
-                if (file.isFile()) {
+                if (file.isFile() && file.getName().endsWith(".j2")) {
                     fileNames.put(getFileNameWithRelativePath(file, file), file);
                 } else {
                     handleDirectories(file, fileNames, file);
@@ -360,7 +360,7 @@ public class ConfigParser {
             for (File currentFile : fileList) {
                 if (currentFile.isDirectory()) {
                     handleDirectories(basePath, files, currentFile);
-                } else {
+                } else if (currentFile.getName().endsWith(".j2")) {
                     files.put(getFileNameWithRelativePath(basePath, currentFile), currentFile);
                 }
             }
